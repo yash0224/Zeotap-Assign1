@@ -11,7 +11,7 @@ In this project, a rule engine that assesses circumstances based on user attribu
 1.
 
 ```bash
- git clone [https://github.com/yash0224/Zeotap-Assign1.git]
+ git clone https://github.com/yash0224/Zeotap-Assign1.git
 ```
 
 2.
