@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rule Management</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        background-color: rgb(196, 244, 244);
+      }
+      form {
+        margin-bottom: 20px;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: rgb(251, 251, 241);
+      }
+      h2 {
+        margin-bottom: 10px;
+      }
+      input,
+      textarea,
+      select {
+        display: block;
+        width: 100%;
+        margin: 5px 0 15px;
+        padding: 10px;
+        font-size: 16px;
+        background-color: transparent;
+        font-family:Georgia, 'Times New Roman', Times, serif
+      }
+      button {
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Rule Management</h1>
+
+    <!-- Create Rule Form -->
+    <form id="createRuleForm" method="POST">
+      <h2>Create Rule</h2>
+      <label for="createRuleId">Rule ID</label>
+      <input
+        type="text"
+        id="createRuleId"
+        name="rule_id"
+        placeholder="Enter Rule ID"
+        required
+      />
+
+      <label for="ruleString">Rule String</label>
+      <textarea
+        id="ruleString"
+        name="rule_string"
+        placeholder="Enter Rule String"
+        required
+      ></textarea>
+
+      <button type="submit">Create Rule</button>
+    </form>
+
+    <!-- Combine Rules Form -->
+    <form id="combineRulesForm" method="POST">
+      <h2>Combine Rules</h2>
+      <label for="combineRuleId">Rule ID</label>
+      <input
+        type="text"
+        id="combineRuleId"
+        name="rule_id"
+        placeholder="Enter Rule ID"
+        required
+      />
+
+      <label for="ruleStrings">Rule Strings (comma-separated)</label>
+      <textarea
+        id="ruleStrings"
+        name="ruleStrings"
+        placeholder="Enter Rule Strings"
+        required
+      ></textarea>
+
+      <label for="combineOperator">Combine Operator</label>
+      <select id="combineOperator" name="combop" required>
+        <option value="AND">AND</option>
+        <option value="OR">OR</option>
+      </select>
+
+      <button type="submit">Combine Rules</button>
+    </form>
+
+    <!-- Evaluate Rule Form -->
+    <form id="evaluateRuleForm" method="GET">
+      <h2>Evaluate Rule</h2>
+      <label for="evalRuleId">Rule ID</label>
+      <input
+        type="text"
+        id="evalRuleId"
+        name="ruleId"
+        placeholder="Enter Rule ID"
+        required
+      />
+
+      <label for="data">Data (JSON format)</label>
+      <textarea
+        id="data"
+        name="data"
+        placeholder='{"key": "value"}'
+        required
+      ></textarea>
+
+      <button type="submit">Evaluate Rule</button>
+    </form>
+
+    <script>
+      // Create Rule Form Submission
+      document.getElementById("createRuleForm").onsubmit = async function (
+        event
+      ) {
+        event.preventDefault();
+        const formData = {
+          rule_id: document.getElementById("createRuleId").value,
+          rule_string: document.getElementById("ruleString").value,
+        };
+        try {
+          const response = await fetch("http://127.0.0.1:8080/create", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(formData),
+          });
+          const result = await response.json();
+          console.log(result);
+          alert("Rule Created");
+          alert(JSON.stringify(result));
+        } catch (error) {
+          console.error("Error:", error);
+          alert("Failed to create rule");
+        }
+      };
+
+      // Combine Rules Form Submission
+      document.getElementById("combineRulesForm").onsubmit = async function (
+        event
+      ) {
+        event.preventDefault();
+        const formData = {
+          rule_id: document.getElementById("combineRuleId").value,
+          ruleStrings: document
+            .getElementById("ruleStrings")
+            .value.split(",")
+            .map((s) => s.trim()),
+          combop: document.getElementById("combineOperator").value,
+        };
+        try {
+          const response = await fetch("http://127.0.0.1:8080/combine", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(formData),
+          });
+          const result = await response.json();
+          console.log(result);
+          alert("Rule Created");
+          alert(JSON.stringify(result));
+        } catch (error) {
+          console.error("Error:", error);
+          alert("Failed to combine rules");
+        }
+      };
+
+      // Evaluate Rule Form Submission
+      document.getElementById("evaluateRuleForm").onsubmit = async function (
+        event
+      ) {
+        event.preventDefault();
+        const formData = {
+          ruleId: document.getElementById("evalRuleId").value,
+          data: JSON.parse(document.getElementById("data").value),
+        };
+        console.log(formData)
+        try {
+          const response = await fetch(`http://127.0.0.1:8080/evaluate`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(formData),
+
+          });
+          const result = await response.json();
+          console.log(result);
+          alert(JSON.stringify(result));
+        } catch (error) {
+          console.error("Error:", error);
+          alert("Failed to evaluate rule");
+        }
+      };
+    </script>
+  </body>
+</html>
