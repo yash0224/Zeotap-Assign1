@@ -5,7 +5,6 @@ In this project, a rule engine that assesses circumstances based on user attribu
 ## Requirements
 - Golang
 - MongoDB
-- Docker
 
 ## Steps to run the application
 
@@ -23,9 +22,7 @@ cd assignment1
 
 3.
 
-```
-docker-compose up --build
-```
 
-The application should start running at port 8000
-Now open your web Browser and run ```http://localhost:8000/````.
+
+The application should start running at port 8080
+Now open your web Browser and run ``http://localhost:8080/``.
