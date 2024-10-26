@@ -1,0 +1,11 @@
+[build]
+  publish = "public" # Directory to publish. Adjust if needed
+  command = "go run main.go" # Command to run your Go application
+
+[build.environment]
+  GO_VERSION = "1.19" # Specify the version of Go you want to use
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
