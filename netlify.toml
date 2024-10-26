@@ -1,5 +1,5 @@
 [build]
-  publish = "public" # Directory to publish. Adjust if needed
+  publish = "templates" # Directory to publish. Adjust if needed
   command = "go run main.go" # Command to run your Go application
 
 [build.environment]
@@ -7,5 +7,5 @@
 
 [[redirects]]
   from = "/*"
-  to = "templates/index.html"
+  to = "/index.html"
   status = 200
