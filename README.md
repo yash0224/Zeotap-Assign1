@@ -5,14 +5,13 @@ In this project, a rule engine that assesses circumstances based on user attribu
 ## Requirements
 - Golang
 - MongoDB
-- Docker
 
 ## Steps to run the application
 
 1.
 
 ```bash
- git clone https://github.com/.git
+ git clone https://github.com/yash0224/Zeotap-Assign1.git
 ```
 
 2.
@@ -21,11 +20,5 @@ In this project, a rule engine that assesses circumstances based on user attribu
 cd assignment1
 ```
 
-3.
-
-```
-docker-compose up --build
-```
-
-The application should start running at port 8000
-Now open your web Browser and run ```http://localhost:8000/````.
+3. The application should start running at port 8080  
+Now open your web Browser and run ``http://localhost:8080/``.
