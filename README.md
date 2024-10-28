@@ -1,5 +1,5 @@
 # Rule Engine With AST
-In this project, a rule engine that assesses circumstances based on user attributes is implemented using an Abstract Syntax Tree (AST). Using a database for storage, the engine facilitates the dynamic construction, modification, and evaluation of rules.
+This project builds a rule engine that checks conditions based on user attributes, using an Abstract Syntax Tree (AST). It uses a database to store information, allowing rules to be created, changed, and evaluated as needed.
 
 
 ## Requirements
